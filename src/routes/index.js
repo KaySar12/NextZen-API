@@ -5,27 +5,28 @@ router.get('/', (req, res) => {
   res.send({ message: 'Hello world' });
 });
 
+// eslint-disable-next-line consistent-return
 router.get('/cloud', (req, res) => {
- const queryParams = req.query;
- let redirectUrl = queryParams.state || '';
-
- if (queryParams.code) {
-    redirectUrl += `?code=${queryParams.code}`;
+  const queryParams = req.query;
+  let redirectUrl = queryParams.state || '';
+  // Check if code or scope is present and append accordingly
+  if (queryParams.code) {
+    redirectUrl += `${redirectUrl.includes('?') ? '&' : '?'}code=${queryParams.code}`;
     if (queryParams.scope) {
       redirectUrl += `&scope=${queryParams.scope}`;
     }
- } else if (queryParams.scope) {
-    redirectUrl += `?scope=${queryParams.scope}`;
- }
+  } else if (queryParams.scope) {
+    redirectUrl += `${redirectUrl.includes('?') ? '&' : '?'}scope=${queryParams.scope}`;
+  }
 
- if (redirectUrl) {
+  if (redirectUrl) {
     // Perform the redirection
     res.redirect(redirectUrl);
- } else {
-    res.send({ message: 'Missing required parameters: state' });
- }
-});
 
+  } else {
+    res.send({ message: 'Missing required parameters: state' });
+  }
+});
 
 router.get('/v1/sys/version', async (req, res) => {
   try {
