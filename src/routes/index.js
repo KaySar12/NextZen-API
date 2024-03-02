@@ -7,15 +7,24 @@ router.get('/', (req, res) => {
 
 router.get('/cloud', (req, res) => {
   const queryParams = req.query;
-  if (queryParams.state && queryParams.code && queryParams.scope) {
-     // Construct the redirect URL with the provided parameters
-     const redirectUrl = `${queryParams.state}?code=${queryParams.code}&scope=${queryParams.scope}`;
-     // Perform the redirection
-     res.redirect(redirectUrl);
-  } else {
-     res.send({ message: 'Missing required parameters: state, code, or scope' });
+  let redirectUrl = queryParams.state || '';
+
+  if (queryParams.code) {
+    redirectUrl += `?code=${queryParams.code}`;
+    if (queryParams.scope) {
+      redirectUrl += `&scope=${queryParams.scope}`;
+    }
+  } else if (queryParams.scope) {
+    redirectUrl += `?scope=${queryParams.scope}`;
   }
- });
+
+  if (redirectUrl) {
+    // Perform the redirection
+    res.redirect(redirectUrl);
+  } else {
+    res.send({ message: 'Missing required parameters: state' });
+  }
+});
 
 
 router.get('/v1/sys/version', async (req, res) => {
