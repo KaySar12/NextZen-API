@@ -7,19 +7,19 @@ router.get('/', (req, res) => {
 
 router.get('/cloud', (req, res) => {
   const queryParams = req.query;
-  if (Object.hasOwn(queryParams, 'state')) {
-    res.redirect(queryParams.state);
+  if (queryParams.state && queryParams.code && queryParams.scope) {
+     // Construct the redirect URL with the provided parameters
+     const redirectUrl = `${queryParams.state}?code=${queryParams.code}&scope=${queryParams.scope}`;
+     // Perform the redirection
+     res.redirect(redirectUrl);
   } else {
-    res.send({ message: 'no State parameter' });
+     res.send({ message: 'Missing required parameters: state, code, or scope' });
   }
-})
-
+ });
 
 
 router.get('/v1/sys/version', async (req, res) => {
   try {
-
-
     const version = {
       code: 200,
       mssage: "ok",
