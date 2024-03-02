@@ -6,24 +6,24 @@ router.get('/', (req, res) => {
 });
 
 router.get('/cloud', (req, res) => {
-  const queryParams = req.query;
-  let redirectUrl = queryParams.state || '';
+ const queryParams = req.query;
+ let redirectUrl = queryParams.state || '';
 
-  if (queryParams.code) {
+ if (queryParams.code) {
     redirectUrl += `?code=${queryParams.code}`;
     if (queryParams.scope) {
       redirectUrl += `&scope=${queryParams.scope}`;
     }
-  } else if (queryParams.scope) {
+ } else if (queryParams.scope) {
     redirectUrl += `?scope=${queryParams.scope}`;
-  }
+ }
 
-  if (redirectUrl) {
+ if (redirectUrl) {
     // Perform the redirection
     res.redirect(redirectUrl);
-  } else {
+ } else {
     res.send({ message: 'Missing required parameters: state' });
-  }
+ }
 });
 
 
