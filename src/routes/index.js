@@ -28,6 +28,9 @@ router.get('/cloud', (req, res) => {
   }
 });
 
+router.get('/feed', (req, res) => {
+  return res.status(200).json({ url: 'https://rss.app/feeds/fWwl4VP5zVwKY9c3.xml' })
+})
 router.get('/v1/sys/version', async (req, res) => {
   try {
     const version = {
