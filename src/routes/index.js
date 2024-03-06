@@ -35,7 +35,7 @@ router.get('/v1/sys/version', async (req, res) => {
   try {
     const version = {
       code: 200,
-      mssage: "ok",
+      mssage: "ok",                              
       data: {
         id: 54,
         change_log: "v1.1.0\n\n Fix tips icon display errors.  https://github.com/IceWhaleTech/CasaOS/issues/1623\n Fix the problem that the text in the app store list is not aligned. https://github.com/IceWhaleTech/CasaOS/issues/1635\n Fix merge did not work after reboot\n Fix the three-way store source was missing after update\n Add Greek and Russian languages.  https://github.com/IceWhaleTech/CasaOS/issues/1617  https://github.com/IceWhaleTech/CasaOS/issues/1616\n Displays the user's avatar on the login screen.  https://github.com/IceWhaleTech/CasaOS/issues/1637\n* Add more file type support for text editor  https://github.com/IceWhaleTech/CasaOS/issues/1575",

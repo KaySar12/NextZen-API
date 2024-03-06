@@ -6,11 +6,11 @@ const helmet = require('helmet');
 const swaggerUI = require('swagger-ui-express');
 const swaggerSpec = require('./swagger');
 const indexRouter = require('./routes/index');
-
+const cors = require('cors');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
-
+app.use(cors());
 app.use(helmet()); // https://expressjs.com/en/advanced/best-practice-security.html#use-helmet
 app.use(logger('dev'));
 app.use(express.json());
